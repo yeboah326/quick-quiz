@@ -22,6 +22,7 @@ pipenv --venv
 <pre>
   "scripts": {
     "start-api": "cd api/ && [path_to_venv]bin/flask run --no-debugger"
+  }
 </pre>
 
 ## Runnning the project
