@@ -16,6 +16,9 @@
     "start-api": "cd quick_quiz_api/ && /home/ultron/.local/share/virtualenvs/api-fYonV0ga/bin/flask run --no-debugger",
     "format-api": "cd quick_quiz_api/ && /home/ultron/.local/share/virtualenvs/api-fYonV0ga/bin/black ./",
     "format-api-diff": "cd quick_quiz_api/ && /home/ultron/.local/share/virtualenvs/api-fYonV0ga/bin/black ./ --diff",
+    "db-init": "cd quick_quiz_api/ && /home/ultron/.local/share/virtualenvs/api-fYonV0ga/bin/flask db init",
+    "db-migrate": "cd quick_quiz_api/ && /home/ultron/.local/share/virtualenvs/api-fYonV0ga/bin/flask db migrate",
+    "db-upgrade": "cd quick_quiz_api/ && /home/ultron/.local/share/virtualenvs/api-fYonV0ga/bin/flask db upgrade",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

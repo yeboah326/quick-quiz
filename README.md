@@ -25,6 +25,34 @@ pipenv --venv
   }
 </pre>
 
+### Set up for database
+<pre>
+CREATE DATABASE database_name;
+</pre>
+
+### Create the environment files .env and .flaskenv
+#### Add these lines to the .env file
+<pre>
+MYSQL_USERNAME=username
+MYSQL_PASSWORD=password
+MYSQL_SERVER=localhost
+MYSQL_DATABASE_NAME=database_name
+SECRET_KEY=generated_key
+</pre>
+
+#### Add these line to the .flaskenv file
+<pre>
+FLASK_APP=run.py
+FLASK_ENV=development
+</pre>
+
+### Perform migrations
+<pre>
+npm db-init
+npm db-migrate
+npm db-upgrade
+</pre>
+
 ## Runnning the project
 ### Frontend
 <pre>
