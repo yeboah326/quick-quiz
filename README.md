@@ -48,9 +48,9 @@ FLASK_ENV=development
 
 ### Perform migrations
 <pre>
-npm db-init
-npm db-migrate
-npm db-upgrade
+npm run db-init
+npm run db-migrate
+npm run db-upgrade
 </pre>
 
 ## Runnning the project
