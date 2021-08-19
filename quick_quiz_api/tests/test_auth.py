@@ -1,4 +1,7 @@
+from quick_quiz_api.tests.utils import drop_database_data
+
 def test_auth_hello(app, client):
+    drop_database_data()
     response = client.get("/auth/hello")
     assert response.json == {"message": "Auth route working"}
     assert response.status_code == 200
@@ -6,6 +9,7 @@ def test_auth_hello(app, client):
 
 # Student SignUp Passed
 def test_auth_signup_student_pass(app, client):
+    drop_database_data()
     response = client.post(
         "auth/signup",
         json={
@@ -22,6 +26,7 @@ def test_auth_signup_student_pass(app, client):
 
 # Student SignUp Failed
 def test_auth_signup_student_fail(app, client):
+    drop_database_data()
     response = client.post(
         "auth/signup",
         json={
@@ -38,6 +43,7 @@ def test_auth_signup_student_fail(app, client):
 
 # Tutor Sign Up Passed
 def test_auth_signup_tutor_pass(app, client):
+    drop_database_data()
     response = client.post(
         "auth/signup",
         json={
@@ -54,6 +60,7 @@ def test_auth_signup_tutor_pass(app, client):
 
 # Tutor Sign Up Failed
 def test_auth_signup_tutor_fail(app, client):
+    drop_database_data()
     response = client.post(
         "auth/signup",
         json={
