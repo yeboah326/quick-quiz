@@ -28,3 +28,4 @@ __pycache__
 .flaskenv
 .env
 migrations/
+.pytest_cache/
