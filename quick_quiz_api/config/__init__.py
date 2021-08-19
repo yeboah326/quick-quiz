@@ -21,3 +21,8 @@ class DevelopmentConfig(Config):
     ENV = "development"
     DEVELOPMENT = True
     DEBUG = True
+
+
+class TestingConfig(Config):
+    ENV = "development"
+    DEVELOPMENT = True
