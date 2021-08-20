@@ -71,14 +71,14 @@ def auth_login():
     data = request.get_json()
 
     if data["user_type"] == "student":
-        if not auth or not auth["email"] or not auth["password"]:
-            return {"message": "User not found or data is invalid"}, 400
-        student = Student.query.filter_by(email=auth["email"]).first()
+        if not data or not data["email"] or not data["password"]:
+            return {"message": "Student not found or data is invalid"}, 400
+        student = Student.query.filter_by(email=data["email"]).first()
 
         if not student:
-            return {"message": "User not found or data is invalid"}, 400
+            return {"message": "Student not found or data is invalid"}, 400
 
-        if check_password_hash(student.password, auth["password"]):
+        if check_password_hash(student.password, data["password"]):
             token = jwt.encode(
                 {
                     "public_id": student.public_id,
@@ -90,14 +90,14 @@ def auth_login():
         return {"message": "Authorization failed"}, 401
 
     elif data["user_type"] == "tutor":
-        if not auth or not auth["email"] or not auth["password"]:
-            return {"message": "User not found or data is invalid"}, 400
-        tutor = Tutor.query.filter_by(email=auth["email"]).first()
+        if not data or not data["email"] or not data["password"]:
+            return {"message": "Tutor not found or data is invalid"}, 400
+        tutor = Tutor.query.filter_by(email=data["email"]).first()
 
         if not tutor:
-            return {"message": "User not found or data is invalid"}, 400
+            return {"message": "Tutor not found or data is invalid"}, 400
 
-        if check_password_hash(tutor.password, auth["password"]):
+        if check_password_hash(tutor.password, data["password"]):
             token = jwt.encode(
                 {
                     "public_id": tutor.public_id,
