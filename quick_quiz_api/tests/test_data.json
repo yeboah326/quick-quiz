@@ -1,0 +1,70 @@
+{
+  "student": {
+    "valid_signup": {
+      "name": "John Student",
+      "email": "jstudent@doemail.com",
+      "password": "123456",
+      "user_type": "student"
+    },
+    "invalid_signup": {
+      "name": null,
+      "email": "jtutor@doemail.com",
+      "password": "123456",
+      "user_type": "student"
+    },
+    "valid_login": {
+      "email": "jstudent@doemail.com",
+      "password": "123456",
+      "user_type": "student"
+    },
+    "invalid_login_no_email": {
+      "email": null,
+      "password": "123456",
+      "user_type": "student"
+    },
+    "invalid_login_wrong_password": {
+      "email": "jstudent@doemail.com",
+      "password": "1234546546",
+      "user_type": "student"
+    },
+    "invalid_login_wrong_email": {
+      "email": "jstudentnew@doemail.com",
+      "password": "123456",
+      "user_type": "student"
+    }
+  },
+  "tutor": {
+    "valid_signup": {
+      "name": "John Tutor",
+      "email": "jtutor@doemail.com",
+      "password": "123456",
+      "user_type": "tutor"
+    },
+    "invalid_signup": {
+      "name": "John Tutor",
+      "email": null,
+      "password": "123456",
+      "user_type": "tutor"
+    },
+    "valid_login": {
+      "email": "jtutor@doemail.com",
+      "password": "123456",
+      "user_type": "tutor"
+    },
+    "invalid_login_no_email": {
+      "email": null,
+      "password": "123456",
+      "user_type": "tutor"
+    },
+    "invalid_login_wrong_password": {
+      "email": "jtutor@doemail.com",
+      "password": "1234561456",
+      "user_type": "tutor"
+    },
+    "invalid_login_wrong_email": {
+      "email": "jtutornew@doemail.com",
+      "password": "1234561456",
+      "user_type": "tutor"
+    }
+  }
+}
