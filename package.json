@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@svgr/cli": "^5.5.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -20,6 +21,7 @@
     "db-init": "cd quick_quiz_api/ && /home/ultron/.local/share/virtualenvs/api-fYonV0ga/bin/flask db init",
     "db-migrate": "cd quick_quiz_api/ && /home/ultron/.local/share/virtualenvs/api-fYonV0ga/bin/flask db migrate",
     "db-upgrade": "cd quick_quiz_api/ && /home/ultron/.local/share/virtualenvs/api-fYonV0ga/bin/flask db upgrade",
+    "create-svgs": "svgr -d ./src/components/icons/ ./src/icons/",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -42,5 +44,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000",
+  "devDependencies": {
+    "@svgr/cli": "^5.5.0"
+  }
 }
