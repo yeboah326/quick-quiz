@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.container{
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+/* Form Section */
+.form-section{
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr 2fr 8fr 1fr;
+    row-gap: 5px;
+}
+
+.navigation{
+    background-color: white;
+    display: grid;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.mobile-chevron{
+    fill: #4B3EFF;
+}
+
+.title{
+    background-color: white;
+    padding: 1.5rem;
+    color: #4B3EFF;
+}
+
+.form-fields{
+    background-color: white;
+    padding: 1.5rem;
+    color:#4B3EFF;
+}
+
+.extra{
+    background-color: white;
+    padding: 1.5rem;
+    color: #4B3EFF;
+}
+
+/* Carousel Section */
+.carousel{
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    grid-template-rows: repeat(12,1fr);
+}
+
+.carousel-images{
+    grid-column: 3/11;
+    grid-row: 4/10;
+    background-color: #4B3EFF;
+    border-radius: 5px;
+}
+
+.carousel-nav{
+    display: none;
+}
+
+.form-input{
+    padding: 0.5rem;
+    border: 2px solid #4B3EFF;
+    height: 2.5rem;
+    border-radius: 5px;
+    width: 100%;
+}
+
+@media screen and (min-width:1020px){
+  
+    .container{
+        flex-direction: row;
+    }
+    
+    .carousel{
+        height: 100vh;
+        width: 50%;
+    }
+
+    .carousel-images{
+        grid-row: 3/11;
+    }
+
+    .carousel-nav{
+        display: grid;
+        background-color: white;
+        grid-row: 1/2;
+        place-items: center;
+    }
+
+    .form-section{
+        height: 100vh;
+        width: 50%;
+    }
+
+    .mobile-chevron{
+        display: none;
+    }
+
+    .desktop-chevron{
+        display: block;
+        fill: #4B3EFF;
+    }
+}
