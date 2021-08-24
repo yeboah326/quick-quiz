@@ -1,0 +1,84 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.choice-container{
+    width: 100%;
+    height: 100vh;
+    background-color: #4B3EFF;
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    grid-template-rows: repeat(12, 1fr);
+}
+
+.choice-navigation{
+    grid-column: span 12;
+    display: grid;
+    align-items: center;
+    margin-left: 1.5rem;
+}
+
+.choice-title{
+    grid-column: span 12;
+    grid-row: 2/3;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+.choice-tutor-div{
+    background-color: white;
+    grid-column: 4/10;
+    grid-row: 3/7;
+    border-radius: 0.5rem;
+}
+
+.choice-tutor-name{
+    grid-column: 5/9;
+    grid-row: 7/8;
+    display: grid;
+    place-items: center;
+}
+
+.choice-student-div{
+    background-color: white;
+    grid-column: 4/10;
+    grid-row: 8/12;
+    border-radius: 0.5rem;
+}
+
+.choice-student-name{
+    grid-column: 5/9;
+    grid-row: 12/13;
+    display: grid;
+    place-items: center;}
+
+@media screen and (min-width:1020px) {
+    .choice-tutor-div{
+        grid-column: 2/6;
+        grid-row: 3/10;
+    }
+
+    .choice-tutor-name{
+        grid-column: 3/5;
+        grid-row: 10/11 ;
+    }
+
+    .choice-student-div{
+        grid-column: 8/12;
+        grid-row: 3/10;
+    }
+
+    .choice-student-name{
+        grid-column: 9/11;
+        grid-row: 10/11 ;
+    }
+
+    .choice-title{
+        grid-column: 2/13;
+        justify-items: start;
+    }
+    
+}

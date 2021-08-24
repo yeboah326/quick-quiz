@@ -71,7 +71,7 @@
 .form-input{
     padding: 0.5rem;
     border: 2px solid #4B3EFF;
-    height: 2.5rem;
+    height: 3rem;
     border-radius: 5px;
     width: 100%;
 }
@@ -112,3 +112,5 @@
         fill: #4B3EFF;
     }
 }
+
+
