@@ -1,6 +1,6 @@
 import "./App.css";
 import { LoginChoice, StudentLogin, TutorLogin } from "./components/login/";
-import { SignUpChoice } from "./components/signup/";
+import { SignUpChoice, StudentSignUp, TutorSignUp } from "./components/signup/";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -8,10 +8,12 @@ function App() {
     <div>
       <Router>
         <Switch>
-          <Route path="/login" exact component={LoginChoice}/>
+          <Route path="/login" exact component={LoginChoice} />
           <Route path="/login/tutor" exact component={TutorLogin} />
           <Route path="/login/student" exact component={StudentLogin} />
-          <Route path="/signup" component={SignUpChoice}/>
+          <Route path="/signup" exact component={SignUpChoice} />
+          <Route path="/signup/tutor" exact component={TutorSignUp} />
+          <Route path="/signup/student" exact component={StudentSignUp} />
         </Switch>
       </Router>
     </div>
