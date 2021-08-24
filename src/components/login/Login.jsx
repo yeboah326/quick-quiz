@@ -2,7 +2,7 @@ import "../../styles/login/login.css";
 import { MontserratLightText, BreeText, Input, Button } from "../generic";
 import { IconmonstrAngelLeftCircleThin } from "../icons";
 
-function Login() {
+function Login({user_type}) {
   return (
     <div className="container">
       <div className="carousel">
@@ -22,7 +22,7 @@ function Login() {
           />
         </div>
         <div className="title">
-          <BreeText Text={"Student"} fontSize={1} />
+          <BreeText Text={(user_type==="student") ? "Student" : "Tutor"} fontSize={1} />
           <BreeText Text={"Login"} fontSize={3} marginTop={-15}/>
         </div>
         <div className="form-fields">
