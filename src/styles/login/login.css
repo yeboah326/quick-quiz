@@ -61,7 +61,7 @@
     grid-column: 3/11;
     grid-row: 4/10;
     background-color: #4B3EFF;
-    border-radius: 5px;
+    border-radius: 1.5rem;
 }
 
 .carousel-nav{
