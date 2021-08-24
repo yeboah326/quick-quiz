@@ -11,12 +11,12 @@ import uuid
 auth = Blueprint("auth", __name__, url_prefix="/auth")
 
 
-@auth.route("/hello")
+@auth.get("/hello")
 def auth_hello():
     return {"message": "Auth route working"}, 200
 
 
-@auth.route("/signup", methods=["POST"])
+@auth.post("/signup")
 def auth_signup():
     # Receive data
     data = request.get_json()
@@ -65,7 +65,7 @@ def auth_signup():
             return {"message": "Tutor signup failed"}, 400
 
 
-@auth.route("/login", methods=["POST"])
+@auth.post("/login")
 def auth_login():
     # Receive data
     data = request.get_json()

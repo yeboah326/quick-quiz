@@ -1,32 +1,15 @@
-import { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Login from "./components/login/login";
+import Signup from "./components/signup/signup";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
-  const [currentUnixTime, setCurrentUnixTime] = useState(1);
-
-  useEffect(() => {
-    fetch("/time").then(res => res.json()).then(data => {
-      setCurrentUnixTime(data.time);
-    });
-  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <p>This is the current unix time {currentUnixTime}</p>
-      </header>
+    <div>
+      <Router>
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+      </Router>
     </div>
   );
 }

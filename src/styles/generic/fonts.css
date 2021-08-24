@@ -1,0 +1,19 @@
+@font-face {
+    font-family: "BreeSerif";
+    src: local("BreeSerif"), url('../../fonts/Bree_Serif/BreeSerif-Regular.ttf') format(truetype);
+}
+
+@font-face {
+    font-family: "MontserratLight";
+    src: local("MontserratLight"), url('../../fonts/Montserrat/Montserrat-Light.ttf') format(truetype);
+}
+
+@font-face {
+    font-family: "MontserratMedium";
+    src: local("MontserratMedium"), url('../../fonts/Montserrat/Montserrat-Medium.ttf') format(truetype);
+}
+
+@font-face {
+    font-family: "MonstserratBold";
+    src: local("MonstserratBold"), url('../../fonts/Montserrat/Montserrat-Bold.ttf') format(truetype); 
+}
