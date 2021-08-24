@@ -7,68 +7,70 @@
 }
 
 
-.container{
+.signup-container{
     display: flex;
     flex-direction: column-reverse;
 }
 
 /* Form Section */
-.form-section{
+.signup-form-section{
     height: 100vh;
     display: grid;
     grid-template-rows: 1fr 2fr 8fr 1fr;
     row-gap: 5px;
 }
 
-.navigation{
+.signup-navigation{
     background-color: white;
     display: grid;
     align-items: center;
     padding: 1.5rem;
 }
 
-.mobile-chevron{
+.signup-mobile-chevron{
     fill: #4B3EFF;
 }
 
-.title{
+.signup-title{
     background-color: white;
     padding: 1.5rem;
     color: #4B3EFF;
 }
 
-.form-fields{
+.signup-form-fields{
     background-color: white;
     padding: 1.5rem;
+    padding-bottom: 0;
     color:#4B3EFF;
 }
 
-.extra{
+.signup-extra{
     background-color: white;
     padding: 1.5rem;
+    padding-top: 0;
     color: #4B3EFF;
 }
 
 /* Carousel Section */
-.carousel{
+.signup-carousel{
     height: 100vh;
     display: grid;
     grid-template-columns: repeat(12,1fr);
     grid-template-rows: repeat(12,1fr);
 }
 
-.carousel-images{
+.signup-carousel-images{
     grid-column: 3/11;
     grid-row: 4/10;
     background-color: #4B3EFF;
     border-radius: 1.5rem;
 }
 
-.carousel-nav{
+.signup-carousel-nav{
     display: none;
 }
 
-.form-input{
+.signup-form-input{
     padding: 0.5rem;
     border: 2px solid #4B3EFF;
     height: 3rem;
@@ -78,36 +80,36 @@
 
 @media screen and (min-width:1020px){
   
-    .container{
+    .signup-container{
         flex-direction: row;
     }
     
-    .carousel{
+    .signup-carousel{
         height: 100vh;
         width: 50%;
     }
 
-    .carousel-images{
+    .signup-carousel-images{
         grid-row: 3/11;
     }
 
-    .carousel-nav{
+    .signup-carousel-nav{
         display: grid;
         background-color: white;
         grid-row: 1/2;
         place-items: center;
     }
 
-    .form-section{
+    .signup-form-section{
         height: 100vh;
         width: 50%;
     }
 
-    .mobile-chevron{
+    .signup-mobile-chevron{
         display: none;
     }
 
-    .desktop-chevron{
+    .signup-desktop-chevron{
         display: block;
         fill: #4B3EFF;
     }

@@ -2,14 +2,13 @@ import "../../styles/login/login.css";
 import { MontserratLightText, BreeText, Input, Button } from "../generic";
 import { IconmonstrAngelLeftCircleThin } from "../icons";
 
-function Login() {
+function Login({user_type}) {
   return (
     <div className="container">
       <div className="carousel">
         <div className="carousel-nav">
           <IconmonstrAngelLeftCircleThin
             className="desktop-chevron"
-            color={"#4B3EFF"}
           />
         </div>
         <div className="carousel-images"></div>
@@ -18,21 +17,18 @@ function Login() {
         <div className="navigation">
           <IconmonstrAngelLeftCircleThin
             className="mobile-chevron"
-            style={{color:"#4B3EFF"}}
           />
         </div>
         <div className="title">
-          <BreeText Text={"Student"} fontSize={1} />
+          <BreeText Text={(user_type==="student") ? "Student" : "Tutor"} fontSize={1} />
           <BreeText Text={"Login"} fontSize={3} marginTop={-15}/>
         </div>
         <div className="form-fields">
           <div style={{marginBottom: "1.5rem"}}>
-            <MontserratLightText Text={"Username"} fontSize={1.3} />
-            <Input className="form-input" type={"text"}/>
+            <Input className="form-input" type={"text"} Text={"Username"}/>
           </div>
           <div style={{marginBottom: "1.5rem"}}>
-            <MontserratLightText Text={"Password"} fontSize={1.3} />
-            <Input className="form-input" type={"password"}/>
+            <Input className="form-input" type={"password"} Text={"Password"}/>
           </div>
           <div style={{textAlign: "right"}}>
             <MontserratLightText Text={"Forgot password?"} fontSize={1} />

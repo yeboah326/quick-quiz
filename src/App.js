@@ -1,14 +1,20 @@
 import "./App.css";
-import Login from "./components/login/login";
-import Signup from "./components/signup/signup";
+import { LoginChoice, StudentLogin, TutorLogin } from "./components/login/";
+import { SignUpChoice, StudentSignUp, TutorSignUp } from "./components/signup/";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
     <div>
       <Router>
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Switch>
+          <Route path="/login" exact component={LoginChoice} />
+          <Route path="/login/tutor" exact component={TutorLogin} />
+          <Route path="/login/student" exact component={StudentLogin} />
+          <Route path="/signup" exact component={SignUpChoice} />
+          <Route path="/signup/tutor" exact component={TutorSignUp} />
+          <Route path="/signup/student" exact component={StudentSignUp} />
+        </Switch>
       </Router>
     </div>
   );
