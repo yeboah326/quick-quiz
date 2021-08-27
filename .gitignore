@@ -30,3 +30,4 @@ __pycache__
 migrations/
 .pytest_cache/
 .vscode/
+env/
