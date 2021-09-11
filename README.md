@@ -9,21 +9,10 @@ npm install
 ### Install flask
 <pre>
 cd api/
-pipenv shell
-pipenv install --dev
+python3 -m venv env
+pip install -r requirements.txt
 </pre>
 
-### Add flask to react-scripts
-Path to virtual environment installed with pipenv
-<pre>
-pipenv --venv
-</pre>
-
-<pre>
-  "scripts": {
-    "start-api": "cd api/ && [path_to_venv]bin/flask run --no-debugger"
-  }
-</pre>
 
 ### Set up for database
 <pre>

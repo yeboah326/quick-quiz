@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
 
 *{
     margin: 0;
@@ -29,6 +28,7 @@
 
 .mobile-chevron{
     fill: #4B3EFF;
+    cursor: pointer;
 }
 
 .title{
@@ -110,6 +110,7 @@
     .desktop-chevron{
         display: block;
         fill: #4B3EFF;
+        cursor: pointer;
     }
 }
 
