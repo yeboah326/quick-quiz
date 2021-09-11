@@ -28,6 +28,7 @@
 
 .mobile-chevron{
     fill: #4B3EFF;
+    cursor: pointer;
 }
 
 .title{
@@ -109,6 +110,7 @@
     .desktop-chevron{
         display: block;
         fill: #4B3EFF;
+        cursor: pointer;
     }
 }
 

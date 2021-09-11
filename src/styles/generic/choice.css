@@ -33,6 +33,12 @@
     grid-column: 4/10;
     grid-row: 3/7;
     border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Hide overflowing png */
+    overflow: hidden;
 }
 
 .choice-tutor-name{
@@ -47,6 +53,9 @@
     grid-column: 4/10;
     grid-row: 8/12;
     border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .choice-student-name{
