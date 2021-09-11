@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from quick_quiz_api import config
@@ -9,6 +10,10 @@ app = Flask(__name__)
 
 # Configuration
 app.config.from_object(config.DevelopmentConfig)
+
+#CORS Setup
+CORS(app)
+
 
 # Database
 db = SQLAlchemy(app)
