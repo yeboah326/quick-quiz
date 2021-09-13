@@ -18,17 +18,12 @@ function Signup({ user_type }) {
     baseURL: "http://127.0.0.1:5000/",
   });
 
-  // TODO: Add logic to check passwords in password field and confirm password field
-  // TODO: Add span to reveal message when input is invalid
-  // TODO: Add a message when signup is successful
+  // TODO: #12 #11 Add logic to check passwords in password field and confirm password field
+  // TODO: #13 Add span to reveal message when input is invalid
+  // TODO: #14 Add a message when signup is successful
+  // TODO: #15 Redirect to login page after the signup is complete
   const onSubmitClick = (event) => {
     event.preventDefault();
-    let credentials = {
-      name: formData.name,
-      email: formData.email,
-      password: formData.password,
-    };
-    console.log(credentials);
     instance ({
       method: "post",
       url: "auth/signup",
