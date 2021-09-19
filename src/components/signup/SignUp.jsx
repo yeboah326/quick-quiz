@@ -53,10 +53,6 @@ function Signup({ user_type }) {
     baseURL: "http://127.0.0.1:5000/",
   });
 
-  // TODO: #12 #11 Add logic to check passwords in password field and confirm password field
-  // TODO: #13 Add span to reveal message when input is invalid
-  // TODO: #14 Add a message when signup is successful
-  // TODO: #15 Redirect to login page after the signup is complete
   const onSubmitClick = (event) => {
     event.preventDefault();
 
