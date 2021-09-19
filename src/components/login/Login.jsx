@@ -5,6 +5,7 @@ import { IconmonstrAngelLeftCircleThin } from "../icons";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { login, useAuth } from "../../auth";
 
 // TODO: Add stock images to student and tutor login page
 
@@ -18,17 +19,13 @@ function Login({ user_type }) {
   const [passwordErr, setPasswordErr] = useState("");
 
   const validateEmail = (email) => {
-    if (!email) {
-      setEmailErr("Email field cannot be empty");
-    }
-    setEmailErr("");
+    !email ? setEmailErr("Email field cannot be empty") : setEmailErr("");
   };
 
   const validatePassword = (password) => {
-    if (!password) {
-      setPasswordErr("Password field cannot be empty");
-    }
-    setEmailErr("");
+    !password
+      ? setPasswordErr("Password field cannot be empty")
+      : setEmailErr("");
   };
 
   // Axios Setup
@@ -43,9 +40,9 @@ function Login({ user_type }) {
     validateEmail(email);
     validatePassword(password);
     console.log(`Email error: ${emailErr}`);
-    console.log(`Password Error: ${passwordErr}`)
-    if (!emailErr & !passwordErr) {
-      console.log("didn't run")
+    // console.log(`Password Error: ${passwordErr}`);
+    if (!emailErr) {
+      console.log("didn't run");
       instance({
         method: "post",
         url: "auth/login",
@@ -68,7 +65,16 @@ function Login({ user_type }) {
             });
           }
 
-          redirectToDashboard()
+          if (response.data["token"]) {
+            login(response.data["token"]);
+            console.log(response.data["token"]);
+          }
+
+          if (logged) {
+          }
+
+          redirectToDashboard();
+          console.log(response);
         })
         .then(function (error) {
           console.log(error);
@@ -76,15 +82,19 @@ function Login({ user_type }) {
     }
   };
 
+  const [logged] = useAuth();
+
   const handlePasswordChange = (event) => setPassword(event.target.value);
   const handleEmailChange = (event) => setEmail(event.target.value);
 
   // Handling redirect to the dashboard
   const redirectToDashboard = () => {
-    return <Redirect to={user_type === 'student' ? '/dashboard' : '/dashboard' }/>
-  }
+    return (
+      <Redirect to={user_type === "student" ? "/dashboard" : "/dashboard"} />
+    );
+  };
 
-  return (
+  return !logged ? (
     <div className="container">
       <div className="carousel">
         <div className="carousel-nav">
@@ -144,6 +154,8 @@ function Login({ user_type }) {
         </div>
       </div>
     </div>
+  ) : (
+    <Redirect to="/dashboard" />
   );
 }
 

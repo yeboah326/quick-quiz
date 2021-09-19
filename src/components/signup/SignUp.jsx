@@ -19,36 +19,33 @@ function Signup({ user_type }) {
   const [passwordErr, setPasswordErr] = useState("");
   const [confirmPasswordErr, setConfirmPasswordErr] = useState("");
 
+  // Authentication
+  const [signUpComplete, setSignUpComplete] = useState(false);
+
   const validateName = (name) => {
     // Make the name field is not empty
-    if (!name) {
-      setNameErr("Name field cannot be empty");
-    }
-    setNameErr("");
+    !name ? setNameErr("Name field cannot be empty") : setNameErr("");
   };
 
   const validateEmail = (email) => {
     // Checks whether the email conforms to the specifications
-    if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-      setEmailErr("Email is invalid");
-      setEmailErr("");
-    }
+    !/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)
+      ? setEmailErr("Email is invalid")
+      : setEmailErr("");
   };
 
   const validatePassword = (password) => {
-    if (!/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(password)) {
-      setPasswordErr(
-        "Password should be at least six character. Password should contain 1 lowercase, 1 uppercase and 1 number"
-      );
-      setPasswordErr("");
-    }
+    !/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(password)
+      ? setPasswordErr(
+          "Password should be at least six character. Password should contain 1 lowercase, 1 uppercase and 1 number"
+        )
+      : setPasswordErr("");
   };
 
   const validateConfirmPassword = (password, confirmPassword) => {
-    if (!(password === confirmPassword)) {
-      setConfirmPasswordErr("Passwords do not match");
-    }
-    setConfirmPasswordErr("");
+    !(password === confirmPassword)
+      ? setConfirmPasswordErr("Passwords do not match")
+      : setConfirmPasswordErr("");
   };
 
   // Axios Setup
@@ -69,11 +66,6 @@ function Signup({ user_type }) {
     validatePassword(password);
     validateConfirmPassword(password, confirmPassword);
 
-    console.log(nameErr);
-    console.log(emailErr);
-    console.log(passwordErr);
-    console.log(confirmPasswordErr);
-    
     if (!nameErr & !emailErr & !passwordErr & !confirmPasswordErr) {
       instance({
         method: "post",
@@ -97,10 +89,11 @@ function Signup({ user_type }) {
               pauseOnHover: true,
               draggable: true,
             });
-            redirectToLoginPage();
           }
 
-          if(response.status === 401) {
+          setSignUpComplete(true);
+
+          if (response.status === 401) {
             toast.error("Sign up not successful", {
               position: "top-right",
               autoClose: 5000,
@@ -108,8 +101,9 @@ function Signup({ user_type }) {
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
-          })
-        }})
+            });
+          }
+        })
         .then(function (error) {
           console.log(error);
         });
@@ -121,13 +115,8 @@ function Signup({ user_type }) {
   const handlePasswordChange = (event) => setPassword(event.target.value);
   const handleConfirmPasswordChange = (event) =>
     setConfirmPassword(event.target.value);
-  
-  // Handling redirect to the login page
-  const redirectToLoginPage = () => {
-    return <Redirect to={user_type === 'student' ? 'login/student' : 'login/tutor' }/>
-  }
 
-  return (
+  return !signUpComplete ? (
     <div className="signup-container">
       <div className="signup-carousel">
         <div className="signup-carousel-nav">
@@ -178,7 +167,7 @@ function Signup({ user_type }) {
               type={"password"}
               Text={"Confirm Password"}
               onChange={handleConfirmPasswordChange}
-              errorMesage={confirmPasswordErr}
+              errorMessage={confirmPasswordErr}
             />
             <div style={{ textAlign: "right" }}>
               <MontserratLightText Text={"Forgot password?"} fontSize={1} />
@@ -195,6 +184,8 @@ function Signup({ user_type }) {
         </div>
       </div>
     </div>
+  ) : (
+    <Redirect to={user_type === "tutor" ? "/login/tutor" : "/login/student"} />
   );
 }
 
