@@ -2,55 +2,117 @@ import { useState } from "react";
 import "../../styles/signup/signup.css";
 import { IconmonstrAngelLeftCircleThin } from "../icons";
 import { BreeText, MontserratLightText, Input, Button } from "../generic";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function Signup({ user_type }) {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+  // Form Data
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  // Form Errors
+  const [nameErr, setNameErr] = useState("");
+  const [emailErr, setEmailErr] = useState("");
+  const [passwordErr, setPasswordErr] = useState("");
+  const [confirmPasswordErr, setConfirmPasswordErr] = useState("");
+
+  // Authentication
+  const [signUpComplete, setSignUpComplete] = useState(false);
+
+  const validateName = (name) => {
+    // Make the name field is not empty
+    !name ? setNameErr("Name field cannot be empty") : setNameErr("");
+  };
+
+  const validateEmail = (email) => {
+    // Checks whether the email conforms to the specifications
+    !/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)
+      ? setEmailErr("Email is invalid")
+      : setEmailErr("");
+  };
+
+  const validatePassword = (password) => {
+    !/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(password)
+      ? setPasswordErr(
+          "Password should be at least six character. Password should contain 1 lowercase, 1 uppercase and 1 number"
+        )
+      : setPasswordErr("");
+  };
+
+  const validateConfirmPassword = (password, confirmPassword) => {
+    !(password === confirmPassword)
+      ? setConfirmPasswordErr("Passwords do not match")
+      : setConfirmPasswordErr("");
+  };
 
   // Axios Setup
   const instance = axios.create({
     baseURL: "http://127.0.0.1:5000/",
   });
 
-  // TODO: #12 #11 Add logic to check passwords in password field and confirm password field
-  // TODO: #13 Add span to reveal message when input is invalid
-  // TODO: #14 Add a message when signup is successful
-  // TODO: #15 Redirect to login page after the signup is complete
   const onSubmitClick = (event) => {
     event.preventDefault();
-    instance ({
-      method: "post",
-      url: "auth/signup",
-      data: {
-        ...formData,
-        ...(user_type === "student" && { user_type: "student" }),
-        ...(user_type === "tutor" && { user_type: "tutor" }),
-      },
-    })
-      .then(function (response) {
-        console.log(response);
+
+    // Run the checks
+    validateName(name);
+    validateEmail(email);
+    validatePassword(password);
+    validateConfirmPassword(password, confirmPassword);
+
+    if (!nameErr & !emailErr & !passwordErr & !confirmPasswordErr) {
+      instance({
+        method: "post",
+        url: "auth/signup",
+        data: {
+          name: name,
+          email: email,
+          password: password,
+          ...(user_type === "student" && { user_type: "student" }),
+          ...(user_type === "tutor" && { user_type: "tutor" }),
+        },
       })
-      .then(function (error) {
-        console.log(error);
-      });
+        .then(function (response) {
+          console.log(response);
+          if (response.status === 200) {
+            toast.success("Sign up successful", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            });
+          }
+
+          setSignUpComplete(true);
+
+          if (response.status === 401) {
+            toast.error("Sign up not successful", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            });
+          }
+        })
+        .then(function (error) {
+          console.log(error);
+        });
+    }
   };
 
-  const handleNameChange = (event) =>
-    setFormData({ ...formData, name: event.target.value });
-  const handleEmailChange = (event) =>
-    setFormData({ ...formData, email: event.target.value });
-  const handlePasswordChange = (event) =>
-    setFormData({ ...formData, password: event.target.value });
+  const handleNameChange = (event) => setName(event.target.value);
+  const handleEmailChange = (event) => setEmail(event.target.value);
+  const handlePasswordChange = (event) => setPassword(event.target.value);
   const handleConfirmPasswordChange = (event) =>
-    setFormData({ ...formData, confirmPassword: event.target.value });
+    setConfirmPassword(event.target.value);
 
-  return (
+  return !signUpComplete ? (
     <div className="signup-container">
       <div className="signup-carousel">
         <div className="signup-carousel-nav">
@@ -80,24 +142,28 @@ function Signup({ user_type }) {
               type={"text"}
               Text={"Full Name"}
               onChange={handleNameChange}
+              errorMessage={nameErr}
             />
             <Input
               className="signup-form-input"
               type={"text"}
               Text={"Email"}
               onChange={handleEmailChange}
+              errorMessage={emailErr}
             />
             <Input
               className="signup-form-input"
               type={"password"}
               Text={"Password"}
               onChange={handlePasswordChange}
+              errorMessage={passwordErr}
             />
             <Input
               className="signup-form-input"
               type={"password"}
               Text={"Confirm Password"}
               onChange={handleConfirmPasswordChange}
+              errorMessage={confirmPasswordErr}
             />
             <div style={{ textAlign: "right" }}>
               <MontserratLightText Text={"Forgot password?"} fontSize={1} />
@@ -108,10 +174,14 @@ function Signup({ user_type }) {
           </div>
         </form>
         <div className="signup-extra">
-          <MontserratLightText Text={"Already have an account?"} />
+          <Link to={user_type === "tutor" ? "/login/tutor" : "/login/student"}>
+            <MontserratLightText Text={"Already have an account?"} />
+          </Link>
         </div>
       </div>
     </div>
+  ) : (
+    <Redirect to={user_type === "tutor" ? "/login/tutor" : "/login/student"} />
   );
 }
 

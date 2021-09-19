@@ -5,3 +5,4 @@ export { default as MontserratMediumText } from "./MontserratMediumText";
 export { default as Input } from "./Input";
 export { default as Button } from "./Button";
 export { default as Choice } from "./Choice";
+export { default as PageNotFound } from "./PageNotFound";

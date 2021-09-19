@@ -2,16 +2,31 @@ import { useState } from "react";
 import "../../styles/login/login.css";
 import { MontserratLightText, BreeText, Input, Button } from "../generic";
 import { IconmonstrAngelLeftCircleThin } from "../icons";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { login, useAuth } from "../../auth";
 
 // TODO: Add stock images to student and tutor login page
 
 function Login({ user_type }) {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  // Form Data
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  //  Form Errors
+  const [emailErr, setEmailErr] = useState("");
+  const [passwordErr, setPasswordErr] = useState("");
+
+  const validateEmail = (email) => {
+    !email ? setEmailErr("Email field cannot be empty") : setEmailErr("");
+  };
+
+  const validatePassword = (password) => {
+    !password
+      ? setPasswordErr("Password field cannot be empty")
+      : setEmailErr("");
+  };
 
   // Axios Setup
   const instance = axios.create({
@@ -20,29 +35,66 @@ function Login({ user_type }) {
 
   const onSubmitClick = (event) => {
     event.preventDefault();
-    instance({
-      method: "post",
-      url: "auth/login",
-      data: {
-        ...formData,
-        ...(user_type === "student" && { user_type: "student" }),
-        ...(user_type === "tutor" && { user_type: "tutor" }),
-      },
-    })
-      .then(function (response) {
-        console.log(response);
+
+    // Run the checks
+    validateEmail(email);
+    validatePassword(password);
+    console.log(`Email error: ${emailErr}`);
+    // console.log(`Password Error: ${passwordErr}`);
+    if (!emailErr) {
+      console.log("didn't run");
+      instance({
+        method: "post",
+        url: "auth/login",
+        data: {
+          email: email,
+          password: password,
+          ...(user_type === "student" && { user_type: "student" }),
+          ...(user_type === "tutor" && { user_type: "tutor" }),
+        },
       })
-      .then(function (error) {
-        console.log(error);
-      });
+        .then(function (response) {
+          if (response.status === 200) {
+            toast.success("Login successful", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            });
+          }
+
+          if (response.data["token"]) {
+            login(response.data["token"]);
+            console.log(response.data["token"]);
+          }
+
+          if (logged) {
+          }
+
+          redirectToDashboard();
+          console.log(response);
+        })
+        .then(function (error) {
+          console.log(error);
+        });
+    }
   };
 
-  const handlePasswordChange = (event) =>
-    setFormData({ ...formData, password: event.target.value });
-  const handleEmailChange = (event) =>
-    setFormData({ ...formData, email: event.target.value });
+  const [logged] = useAuth();
 
-  return (
+  const handlePasswordChange = (event) => setPassword(event.target.value);
+  const handleEmailChange = (event) => setEmail(event.target.value);
+
+  // Handling redirect to the dashboard
+  const redirectToDashboard = () => {
+    return (
+      <Redirect to={user_type === "student" ? "/dashboard" : "/dashboard"} />
+    );
+  };
+
+  return !logged ? (
     <div className="container">
       <div className="carousel">
         <div className="carousel-nav">
@@ -73,6 +125,7 @@ function Login({ user_type }) {
                 type={"text"}
                 Text={"Email"}
                 onChange={handleEmailChange}
+                errorMessage={emailErr}
               />
             </div>
             <div style={{ marginBottom: "1.5rem" }}>
@@ -81,6 +134,7 @@ function Login({ user_type }) {
                 type={"password"}
                 Text={"Password"}
                 onChange={handlePasswordChange}
+                errorMessage={passwordErr}
               />
             </div>
             <div style={{ textAlign: "right" }}>
@@ -92,10 +146,16 @@ function Login({ user_type }) {
           </div>
         </form>
         <div className="extra">
-          <MontserratLightText Text={"Don't have an account?"} />
+          <Link
+            to={user_type === "tutor" ? "/signup/tutor" : "/signup/student"}
+          >
+            <MontserratLightText Text={"Don't have an account?"} />
+          </Link>
         </div>
       </div>
     </div>
+  ) : (
+    <Redirect to="/dashboard" />
   );
 }
 
